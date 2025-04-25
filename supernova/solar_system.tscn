@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy2qg5mdi1k05"]
+
+[ext_resource type="Script" uid="uid://pijfudnakw06" path="res://solar_system.gd" id="1_hbvo3"]
+
+[node name="Solar System" type="Node2D"]
+script = ExtResource("1_hbvo3")

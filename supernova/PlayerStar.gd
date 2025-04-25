@@ -1,8 +1,9 @@
 extends Node2D
 var thrust = 200
 
-@onready var mass = 200
-@onready var heat = 200
+@export var mass : int
+@export var heat : int
+
 
 
 func _integrate_forces(state):
@@ -10,12 +11,6 @@ func _integrate_forces(state):
 	if Input.is_action_pressed("Onmouseleft"):
 		state.apply_force(disttomouse)
 		mass -= 1
-		print("test")
 	if Input.is_action_pressed("Onmouseright"):
 		state.apply_force(disttomouse)
 		heat -= 1
-		print("test")
-	if Input.is_action_just_pressed("Scrollin"):
-		get_node("Camera2D").set_zoom(-Vector2(0.1, 0.1))
-	if Input.is_action_just_pressed("Scrollout"):
-		get_node("Camera2D").set_zoom(+Vector2(0.1, 0.1))

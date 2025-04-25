@@ -1,27 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx0hlq561u0vg"]
+[gd_scene load_steps=5 format=3 uid="uid://bx0hlq561u0vg"]
 
 [ext_resource type="Script" uid="uid://05cxj7rstte6" path="res://PlayerStar.gd" id="1_8uh7m"]
 [ext_resource type="Texture2D" uid="uid://cf68hnoet5472" path="res://icon.svg" id="1_37kl0"]
+[ext_resource type="Script" uid="uid://bksqqui43v6og" path="res://PlayerCamera.gd" id="2_ifye4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37kl0"]
 
-[node name="PlayerStar" type="Node2D"]
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="PlayerStar" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 124
 gravity_scale = 0.0
 can_sleep = false
 script = ExtResource("1_8uh7m")
 
-[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+[node name="PlayerCamera" type="Camera2D" parent="."]
 process_callback = 0
+limit_smoothed = true
+script = ExtResource("2_ifye4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_37kl0")
 debug_color = Color(0.133333, 0, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_37kl0")
+
+[node name="PlayerStar" type="Node2D" parent="."]
