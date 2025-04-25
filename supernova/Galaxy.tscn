@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx83x5yn67eww"]
+
+[ext_resource type="PackedScene" uid="uid://bx0hlq561u0vg" path="res://PlayerStar.tscn" id="1_udkx1"]
+[ext_resource type="PackedScene" uid="uid://bmvikadpdb6uo" path="res://GasPlanet.tscn" id="2_tkqfo"]
+
+[node name="Galaxy" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="PlayerStar" parent="." instance=ExtResource("1_udkx1")]
+position = Vector2(433, 217)
+
+[node name="GasPlanet" parent="." instance=ExtResource("2_tkqfo")]
+position = Vector2(186, 136)
