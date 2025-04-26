@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://dx83x5yn67eww"]
+[gd_scene load_steps=6 format=3 uid="uid://dx83x5yn67eww"]
 
 [ext_resource type="PackedScene" uid="uid://bx0hlq561u0vg" path="res://PlayerStar.tscn" id="1_iaove"]
-[ext_resource type="Script" uid="uid://tnmbm05vr8d1" path="res://Globals.gd" id="1_t680u"]
+[ext_resource type="Script" uid="uid://56j3jnfshoro" path="res://universe.gd" id="1_vwwyn"]
 [ext_resource type="Script" uid="uid://bksqqui43v6og" path="res://PlayerCamera.gd" id="2_2wp28"]
-[ext_resource type="PackedScene" uid="uid://bmvikadpdb6uo" path="res://Planet.tscn" id="2_6ygfl"]
 [ext_resource type="PackedScene" uid="uid://clqb70pltj4d8" path="res://GUI.tscn" id="2_t680u"]
-[ext_resource type="PackedScene" uid="uid://csush3o8m3yfk" path="res://OtherStar.tscn" id="3_6ygfl"]
+[ext_resource type="PackedScene" uid="uid://cy2qg5mdi1k05" path="res://solar_system.tscn" id="5_vwwyn"]
 
 [node name="Universe" type="Node2D"]
-script = ExtResource("1_t680u")
+script = ExtResource("1_vwwyn")
+gravityrange = 2.0
+solarsystem = ExtResource("5_vwwyn")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
@@ -27,12 +28,6 @@ offset_left = -550.0
 offset_top = -300.0
 offset_right = -550.0
 offset_bottom = -300.0
-
-[node name="OtherStar" parent="." instance=ExtResource("3_6ygfl")]
-position = Vector2(614, 119)
-
-[node name="Planet" parent="OtherStar" instance=ExtResource("2_6ygfl")]
-position = Vector2(-170, 7)
 
 [connection signal="absorbed" from="PlayerStar" to="." method="_on_player_star_absorbed"]
 [connection signal="massheatupdate" from="PlayerStar" to="." method="_on_player_star_massheatupdate"]

@@ -6,6 +6,7 @@ var type = randi_range(1, 3)
 @export var orbitvelocity : float
 var orbitradius = randi_range(100.0, 2000.0)
 var orbitangle = randf_range(-2*PI, 2*PI)
+var impulsetrigger = false
 
 var is_star := false
 var stableorbit = true
@@ -35,6 +36,7 @@ func Gravity(_delta):
 				var forceMag = Globals.G * ((mass * otherbodyMass) / (distance * distance))
 				var force = direction.normalized() * forceMag
 				apply_central_force(-force)
+	
 				
 	if stableorbit == true:
 		var M = get_parent().mass

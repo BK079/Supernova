@@ -10,4 +10,3 @@ Star = ExtResource("2_tfb7d")
 Planet = ExtResource("1_hp4wh")
 
 [node name="OtherStar" parent="." instance=ExtResource("2_tfb7d")]
-position = Vector2(541, 296)
