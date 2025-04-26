@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx0hlq561u0vg"]
+[gd_scene load_steps=6 format=3 uid="uid://bx0hlq561u0vg"]
 
 [ext_resource type="Script" uid="uid://05cxj7rstte6" path="res://PlayerStar.gd" id="1_8uh7m"]
 [ext_resource type="Texture2D" uid="uid://cf68hnoet5472" path="res://icon.svg" id="1_37kl0"]
+[ext_resource type="AudioStream" uid="uid://b0cyjc4g2wq4b" path="res://Audio Assets/sun existing.wav" id="3_ifye4"]
+[ext_resource type="AudioStream" uid="uid://bp7bq2krtaefj" path="res://Audio Assets/Eating a planet.wav" id="4_mxbn7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37kl0"]
 
@@ -27,5 +29,12 @@ debug_color = Color(0.133333, 0, 0, 1)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_37kl0")
+
+[node name="SunExisting" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ifye4")
+autoplay = true
+
+[node name="EatingPlanet" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mxbn7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -16,6 +16,7 @@ func _on_body_entered(body):
 		print(body.get_rid())
 		mass += body.mass
 		body.queue_free()
+		$EatingPlanet.play()
 	if body.is_in_group("Celestials"):
 		print(body.get_rid())
 		print(body.mass)
