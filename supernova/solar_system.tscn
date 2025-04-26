@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy2qg5mdi1k05"]
+[gd_scene load_steps=5 format=3 uid="uid://cy2qg5mdi1k05"]
 
-[ext_resource type="Script" uid="uid://pijfudnakw06" path="res://solar_system.gd" id="1_hbvo3"]
+[ext_resource type="PackedScene" uid="uid://bx0hlq561u0vg" path="res://PlayerStar.tscn" id="1_auk15"]
+[ext_resource type="PackedScene" uid="uid://bmvikadpdb6uo" path="res://Planet.tscn" id="1_hp4wh"]
+[ext_resource type="Script" uid="uid://bksqqui43v6og" path="res://PlayerCamera.gd" id="2_ms4l2"]
+[ext_resource type="PackedScene" uid="uid://csush3o8m3yfk" path="res://OtherStar.tscn" id="2_tfb7d"]
 
 [node name="Solar System" type="Node2D"]
-script = ExtResource("1_hbvo3")
+
+[node name="PlayerStar" parent="." instance=ExtResource("1_auk15")]
+position = Vector2(479, 257)
+mass = 200.0
+
+[node name="Camera2D" type="Camera2D" parent="PlayerStar"]
+script = ExtResource("2_ms4l2")
+
+[node name="Planet" parent="." instance=ExtResource("1_hp4wh")]
+position = Vector2(386, 310)
+density = 0.02
+
+[node name="OtherStar" parent="." instance=ExtResource("2_tfb7d")]
+position = Vector2(563, 313)
+
+[connection signal="instability" from="Planet" to="OtherStar" method="_on_planet_instability"]

@@ -1,20 +1,27 @@
 extends RigidBody2D
 
 @export var thrust = 20
-@export var heat : int
-@export var fakemass : int
+@export var heat : float
 @export var density : float
 
+
 signal absorbed
+signal massheatupdate
 
 func _onready():
 	$CollisionShape2D.shape.radius = max(mass*density, 1)
-	$Sprite2D.scale = Vector2(max(mass*density*0.03, 0.01), max(mass*density*0.03, 0.01))
+	$Sprite2D.scale = Vector2(max(mass*density, 0.01), max(mass*density, 0.01))
+
 
 func _on_body_entered(body):
 	if body.is_in_group("Planets"):
-		print(body.get_rid())
-		mass += body.mass
+		if body.type == 1:
+			mass += body.mass
+		if body.type == 2:
+			mass += body.mass*0.5
+			heat += body.mass*0.5
+		if body.type == 3:
+			heat += body.mass
 		body.queue_free()
 	if body.is_in_group("Celestials"):
 		print(body.get_rid())
@@ -24,7 +31,9 @@ func _on_body_entered(body):
 			queue_free()
 		if self.mass > body.mass:
 			mass += body.mass
+			heat += body.mass
 			body.queue_free()
+	massheatupdate.emit(mass, heat)
 
 func _integrate_forces(state):
 	var disttomouse = get_global_mouse_position() - get_global_position()
