@@ -1,21 +1,24 @@
 extends Node2D
 
 var Starcount = randi_range(1, 3)
-var Planetcount = randi_range(0, 20)
+var Planetcount = randi_range(1, 12)
+var orbits : Array
+
+@export var Star = load("res://OtherStar.tscn")
+@export var Planet = load("res://Planet.tscn")
 
 
-var Star = load("res://OtherStar.tscn")
-var Planet = load("res://Planet.tscn")
-
-
+	
+	
 func _ready():
-	print(Starcount)
-	for i in Starcount:
-		var Starinstance = Star.instantiate()
-		add_child(Starinstance)
-		get_child(i).set_global_position(Vector2(10*i, 10*i))
-	print(Planetcount)
 	for i in Planetcount:
 		var Planetinstance = Planet.instantiate()
-		add_child(Planetinstance)
-		get_child(i).set_global_position(Vector2(100*i, 100*i))
+		get_child(0).add_child(Planetinstance)
+		var orbitradius = randi_range(100.0, 3000.0)
+		while orbits.any(func(number): return ((orbitradius - 100) <= number and number <= (orbitradius + 100))):
+			orbitradius = randi_range(100.0, 3000.0)
+		orbits.append(orbitradius)
+		get_child(0).get_child(i+2).orbitradius = orbitradius
+		get_child(0).get_child(i+2).position = Vector2(orbitradius, orbitradius).rotated(randf_range(-2*PI, 2*PI))
+		
+	

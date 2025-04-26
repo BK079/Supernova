@@ -1,23 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy2qg5mdi1k05"]
+[gd_scene load_steps=4 format=3 uid="uid://cy2qg5mdi1k05"]
 
 [ext_resource type="PackedScene" uid="uid://bmvikadpdb6uo" path="res://Planet.tscn" id="1_hp4wh"]
+[ext_resource type="Script" uid="uid://pijfudnakw06" path="res://solar_system.gd" id="1_tfb7d"]
 [ext_resource type="PackedScene" uid="uid://csush3o8m3yfk" path="res://OtherStar.tscn" id="2_tfb7d"]
 
 [node name="Solar System" type="Node2D"]
+script = ExtResource("1_tfb7d")
+Star = ExtResource("2_tfb7d")
+Planet = ExtResource("1_hp4wh")
 
 [node name="OtherStar" parent="." instance=ExtResource("2_tfb7d")]
-position = Vector2(563, 313)
-
-[node name="Planet" parent="OtherStar" instance=ExtResource("1_hp4wh")]
-position = Vector2(-177, -3)
-density = 0.02
-
-[node name="Planet2" parent="OtherStar" instance=ExtResource("1_hp4wh")]
-position = Vector2(138, -90)
-orbitradius = 200.0
-
-[node name="Planet3" parent="OtherStar" instance=ExtResource("1_hp4wh")]
-position = Vector2(-65, -105)
-orbitradius = 370.0
-
-[connection signal="instability" from="OtherStar/Planet" to="OtherStar" method="_on_planet_instability"]
+position = Vector2(541, 296)

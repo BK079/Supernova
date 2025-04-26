@@ -4,9 +4,9 @@ var type = randi_range(1, 3)
 @export var density : float
 @export var initial_velocity := Vector2.ZERO
 @export var orbitvelocity : float
-@export var orbitradius : float
+var orbitradius = randi_range(100.0, 2000.0)
+var orbitangle = randf_range(-2*PI, 2*PI)
 
-var orbitangle := 0.0
 var is_star := false
 var stableorbit = true
 
@@ -24,7 +24,7 @@ func _ready():
 func _physics_process(delta):
 	Gravity(delta)
 	
-func Gravity(delta):
+func Gravity(_delta):
 	if stableorbit == false:
 		instability.emit()
 		for otherbody in Globals.celestialbodies:

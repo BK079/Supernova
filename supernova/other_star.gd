@@ -4,7 +4,6 @@ extends RigidBody2D
 @export var initial_velocity := Vector2.ZERO
 var is_star := true
 var stableorbit := true
-var orbitdict : Dictionary
 
 
 func _ready():
