@@ -8,7 +8,7 @@
 [node name="PlayerStar" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 124
-mass = 201.0
+mass = 200.0
 gravity_scale = 0.0
 can_sleep = false
 lock_rotation = true

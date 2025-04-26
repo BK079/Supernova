@@ -5,12 +5,14 @@ extends RigidBody2D
 @export var density : float
 
 
+
 signal absorbed
 signal massheatupdate
 
 func _onready():
 	$CollisionShape2D.shape.radius = max(mass*density, 1)
 	$Sprite2D.scale = Vector2(max(mass*density, 0.01), max(mass*density, 0.01))
+	Globals.celestialbodies.append(self)
 
 
 func _on_body_entered(body):
@@ -22,6 +24,7 @@ func _on_body_entered(body):
 			heat += body.mass*0.5
 		if body.type == 3:
 			heat += body.mass
+		Globals.celestialbodies.erase(body)
 		body.queue_free()
 	if body.is_in_group("Celestials"):
 		print(body.get_rid())
@@ -32,6 +35,8 @@ func _on_body_entered(body):
 		if self.mass > body.mass:
 			mass += body.mass
 			heat += body.mass
+			Globals.celestialbodies.erase(body)
+			print(Globals.celestialbodies)
 			body.queue_free()
 	massheatupdate.emit(mass, heat)
 
@@ -46,4 +51,16 @@ func _integrate_forces(state):
 		heat -= 1
 	$CollisionShape2D.shape.radius = max(mass*density, 1)
 	$Sprite2D.scale = Vector2(max(mass*density*0.03, 0.01), max(mass*density*0.03, 0.01))
+	Gravity()
 		
+
+func Gravity():
+	for otherbody in Globals.celestialbodies:
+		if otherbody != self:
+			var otherbodyMass = otherbody.mass
+			var direction = self.get_global_position() - otherbody.get_global_position()
+			var distance = direction.length()
+				
+			var forceMag = Globals.G * ((mass * otherbodyMass) / (distance * distance))
+			var force = direction.normalized() * forceMag
+			apply_central_force(-force)

@@ -2,7 +2,6 @@ extends RigidBody2D
 
 var type = randi_range(1, 3)
 @export var density : float
-@export var G = 6.6743 * pow(10, 4)
 @export var initial_velocity := Vector2.ZERO
 @export var orbitvelocity : float
 @export var orbitradius : float
@@ -34,14 +33,15 @@ func Gravity(delta):
 				var direction = self.get_global_position() - otherbody.get_global_position()
 				var distance = direction.length()
 				
-				var forceMag = G * ((mass * otherbodyMass) / (distance * distance))
+				var forceMag = Globals.G * ((mass * otherbodyMass) / (distance * distance))
 				var force = direction.normalized() * forceMag
 				apply_central_force(-force)
+				
 	if stableorbit == true:
 		var M = get_parent().mass
 		var direction = self.get_global_position() - get_parent().get_global_position()
 		var distance = direction.length()
-		orbitvelocity = sqrt((G * M)/distance)*pow(10, -3)
+		orbitvelocity = sqrt((Globals.G * M)/distance)*pow(10, -3)
 		orbitangle += orbitvelocity * get_process_delta_time()
 		var x_pos = cos(orbitangle)
 		var y_pos = sin(orbitangle)

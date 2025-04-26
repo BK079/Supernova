@@ -9,18 +9,18 @@
 
 [node name="Universe" type="Node2D"]
 script = ExtResource("1_vwwyn")
+gravityrange = 3.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="PlayerStar" parent="." instance=ExtResource("1_iaove")]
-position = Vector2(433, 217)
-heat = 0.0
+position = Vector2(546, 662)
 
 [node name="Cameratransform" type="RemoteTransform2D" parent="PlayerStar"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(433, 217)
+position = Vector2(546, 662)
 script = ExtResource("2_2wp28")
 
 [node name="Control" parent="Camera2D" instance=ExtResource("2_t680u")]
@@ -33,7 +33,7 @@ offset_bottom = -300.0
 position = Vector2(614, 119)
 
 [node name="Planet" parent="OtherStar" instance=ExtResource("2_6ygfl")]
-position = Vector2(-428, 17)
+position = Vector2(-170, 7)
 
 [connection signal="absorbed" from="PlayerStar" to="." method="_on_player_star_absorbed"]
 [connection signal="massheatupdate" from="PlayerStar" to="." method="_on_player_star_massheatupdate"]

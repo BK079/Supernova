@@ -1,7 +1,6 @@
 extends RigidBody2D
 
 @export var density : float
-@export var G = 6.6743 * pow(10, 4)
 @export var initial_velocity := Vector2.ZERO
 var is_star := true
 var stableorbit := true
@@ -31,7 +30,7 @@ func Gravity(_delta):
 				var direction = self.get_global_position() - otherbody.get_global_position()
 				var distance = direction.length()
 				
-				var forceMag = G * ((mass * otherbodyMass) / (distance * distance))
+				var forceMag = Globals.G * ((mass * otherbodyMass) / (distance * distance))
 				var force = direction.normalized() * forceMag
 				
 				apply_central_force(-force)
