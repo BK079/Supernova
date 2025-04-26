@@ -1,9 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx0hlq561u0vg"]
+[gd_scene load_steps=18 format=3 uid="uid://bx0hlq561u0vg"]
 
 [ext_resource type="Script" uid="uid://05cxj7rstte6" path="res://PlayerStar.gd" id="1_8uh7m"]
 [ext_resource type="Texture2D" uid="uid://cf68hnoet5472" path="res://icon.svg" id="1_37kl0"]
+[ext_resource type="Texture2D" uid="uid://ctbvrriaods8b" path="res://Heat2.png" id="3_mxbn7"]
+[ext_resource type="Texture2D" uid="uid://d2fuahmy4leag" path="res://solar flare.png" id="3_of3j0"]
+[ext_resource type="Script" path="res://heat.gd" id="4_is6pa"]
+[ext_resource type="Texture2D" uid="uid://cfepnhul5gjgf" path="res://mass.png" id="4_ncq60"]
+[ext_resource type="Script" path="res://jet.gd" id="6_flfly"]
+[ext_resource type="Script" path="res://mass.gd" id="6_of3j0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37kl0"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_is6pa"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_of3j0"]
+offsets = PackedFloat32Array(0, 0.179673, 0.437387, 0.693285, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.812553, 0.396063, 9.62615e-07, 1, 0.830227, 0.628377, 0.266784, 1, 1, 1, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_flfly"]
+gradient = SubResource("Gradient_of3j0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y5wng"]
+particle_flag_disable_z = true
+spread = 64.286
+flatness = 0.125
+angular_velocity_min = -132.0
+angular_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.4
+color_ramp = SubResource("GradientTexture1D_flfly")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_flfly"]
+blend_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_atrv1"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -17.56
+radial_accel_max = -11.71
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = -2.23517e-06
+scale_min = 0.1
+scale_max = 0.15
+color_ramp = SubResource("GradientTexture1D_flfly")
+turbulence_noise_strength = 2.6
+turbulence_noise_scale = 1.397
+turbulence_noise_speed_random = 0.0
+turbulence_influence_max = 0.159
+turbulence_initial_displacement_min = -41.1
+turbulence_initial_displacement_max = -3.1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_atrv1"]
+blend_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h84i6"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.2
+color_ramp = SubResource("GradientTexture1D_flfly")
 
 [node name="PlayerStar" type="RigidBody2D"]
 collision_layer = 2
@@ -15,6 +72,7 @@ lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("1_8uh7m")
+heat = 200.0
 density = 0.02
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -25,5 +83,34 @@ debug_color = Color(0.133333, 0, 0, 1)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_37kl0")
+
+[node name="heat" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_is6pa")
+texture = ExtResource("3_mxbn7")
+lifetime = 0.5
+interp_to_end = 0.019
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_y5wng")
+script = ExtResource("4_is6pa")
+
+[node name="Jet" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_flfly")
+position = Vector2(3, 211)
+rotation = 6.25206
+scale = Vector2(1.93719, 2.64857)
+amount = 2
+texture = ExtResource("3_of3j0")
+lifetime = 0.16
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_atrv1")
+script = ExtResource("6_flfly")
+
+[node name="Mass" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_atrv1")
+texture = ExtResource("4_ncq60")
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_h84i6")
+script = ExtResource("6_of3j0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
