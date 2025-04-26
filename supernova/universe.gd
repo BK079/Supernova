@@ -23,6 +23,7 @@ func _physics_process(delta):
 			var distance = $PlayerStar.get_global_position() - bodies.get_global_position()
 			if  distance.length() < $PlayerStar.mass*gravityrange:
 				bodies.stableorbit = false
+	print(masstrack)
 
 func _on_player_star_absorbed(body):
 	$PlayerStar/Cameratransform.reparent(body)
@@ -30,9 +31,8 @@ func _on_player_star_absorbed(body):
 
 func _on_player_star_massheatupdate(mass, heat):
 	masstrack = mass
-	print(masstrack)
 	heatrack = heat
-	print(heatrack)
 	$Camera2D/Control/GUI/VBoxContainer2/HBoxContainer2/MassBar.value = masstrack
 	$Camera2D/Control/GUI/VBoxContainer2/HBoxContainer/HeatBar.value = heatrack
+	
 	

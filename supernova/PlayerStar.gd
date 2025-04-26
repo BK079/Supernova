@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var thrust = 20
+@export var thrust = 0.5
 @export var heat : float
 @export var density : float
 
@@ -18,9 +18,9 @@ func _onready():
 func _on_body_entered(body):
 	if body.is_in_group("Planets"):
 		if body.type == 1:
-			mass += body.mass
+			mass = clamp(mass+body.mass, 10, 1000)
 		if body.type == 2:
-			mass += body.mass*0.5
+			mass = clamp(mass+body.mass*0.5, 10, 1000)
 			heat += body.mass*0.5
 		if body.type == 3:
 			heat += body.mass
@@ -33,7 +33,7 @@ func _on_body_entered(body):
 			absorbed.emit(body)
 			queue_free()
 		if self.mass > body.mass:
-			mass += body.mass
+			mass = clamp(mass+body.mass, 10, 1000)
 			heat += body.mass
 			Globals.celestialbodies.erase(body)
 			print(Globals.celestialbodies)
@@ -43,15 +43,15 @@ func _on_body_entered(body):
 func _integrate_forces(state):
 	var disttomouse = get_global_mouse_position() - get_global_position()
 	if Input.is_action_pressed("Onmouseleft"):
-		state.apply_force(disttomouse*thrust)
-		mass -= 1.0
-		print(mass)
+		state.apply_force(disttomouse*thrust*mass)
+		mass = clamp(mass-1, 10, 1000)
 	if Input.is_action_pressed("Onmouseright"):
 		state.apply_force(disttomouse*thrust)
 		heat -= 1
 	$CollisionShape2D.shape.radius = max(mass*density, 1)
 	$Sprite2D.scale = Vector2(max(mass*density*0.03, 0.01), max(mass*density*0.03, 0.01))
 	Gravity()
+	
 		
 
 func Gravity():
