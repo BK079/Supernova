@@ -55,3 +55,4 @@ Scrollout={
 2d_physics/layer_5="Gas"
 2d_physics/layer_6="Other Star"
 2d_physics/layer_7="Other obstacle"
+2d_physics/layer_8="Gravitycheck"

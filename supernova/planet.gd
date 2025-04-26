@@ -4,15 +4,20 @@ var type = randi_range(1, 3)
 @export var density : float
 @export var G = 6.6743 * pow(10, 4)
 @export var initial_velocity := Vector2.ZERO
+@export var orbitvelocity : float
+@export var orbitradius : float
+
+var orbitangle := 0.0
 var is_star := false
 var stableorbit = true
+
 signal instability
 
 
 
 func _ready():
 	establishtype()
-	$CollisionShape2D.shape.radius = max(mass*density, 1)
+	$Collidershape.shape.radius = max(mass*density, 1)
 	$Sprite2D.scale = Vector2(max(mass*density*0.015, 0.01), max(mass*density*0.015, 0.01))
 	Globals.celestialbodies.append(self)
 	pass
@@ -33,15 +38,15 @@ func Gravity(delta):
 				var force = direction.normalized() * forceMag
 				apply_central_force(-force)
 	if stableorbit == true:
-		var centripetal = self.get_global_position() - get_parent().get_node("OtherStar").get_global_position()
-		var r = centripetal.length()
-		var starmass = get_parent().get_node("OtherStar").mass
-		var velocitydir = centripetal.rotated(deg_to_rad(90))
-		print(velocitydir)
-		var velocity = sqrt((G * starmass)/r)
-		var force = velocitydir.normalized() * velocity*10
-		apply_central_force(force)
-	
+		var M = get_parent().mass
+		var direction = self.get_global_position() - get_parent().get_global_position()
+		var distance = direction.length()
+		orbitvelocity = sqrt((G * M)/distance)*pow(10, -3)
+		orbitangle += orbitvelocity * get_process_delta_time()
+		var x_pos = cos(orbitangle)
+		var y_pos = sin(orbitangle)
+		position.x = orbitradius * x_pos
+		position.y = orbitradius * y_pos
 	
 func establishtype():
 	if type == 1:

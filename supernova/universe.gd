@@ -20,7 +20,7 @@ func _physics_process(delta):
 		$Camera2D/Control/GUI/VBoxContainer2/HBoxContainer/HeatBar.value = heatrack
 
 func _on_player_star_absorbed(body):
-	$PlayerStar/RemoteTransform2D.reparent(body)
+	$PlayerStar/Cameratransform.reparent(body)
 
 
 func _on_player_star_massheatupdate(mass, heat):
