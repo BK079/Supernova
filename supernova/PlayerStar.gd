@@ -37,4 +37,4 @@ func _integrate_forces(state):
 		heat -= 1
 	$CollisionShape2D.shape.radius = max(mass*density, 1)
 	$Sprite2D.scale = Vector2(max(mass*density*0.03, 0.01), max(mass*density*0.03, 0.01))
-		
+	
