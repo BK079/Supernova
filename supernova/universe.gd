@@ -17,7 +17,7 @@ func _ready():
 
 	
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_pressed("Onmouseleft") and has_node("PlayerStar"):
 		masstrack = $PlayerStar.mass
 		$Camera2D/Control/GUI/VBoxContainer2/HBoxContainer2/MassBar.value = masstrack

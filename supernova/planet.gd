@@ -4,7 +4,7 @@ var type = randi_range(1, 3)
 @export var density : float
 @export var initial_velocity := Vector2.ZERO
 @export var orbitvelocity : float
-var orbitradius = randi_range(100.0, 2000.0)
+var orbitradius = randi_range(100, 2000)
 var orbitangle = randf_range(-2*PI, 2*PI)
 var impulsetrigger = false
 var heat : float
