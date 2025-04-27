@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/SOUNDSCAPE.mp3-604b8b64b540807c1d4787ff11c614
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

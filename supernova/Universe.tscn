@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx83x5yn67eww"]
+[gd_scene load_steps=9 format=3 uid="uid://dx83x5yn67eww"]
 
 [ext_resource type="PackedScene" uid="uid://bx0hlq561u0vg" path="res://PlayerStar.tscn" id="1_iaove"]
 [ext_resource type="Script" uid="uid://56j3jnfshoro" path="res://universe.gd" id="1_vwwyn"]
 [ext_resource type="Script" uid="uid://bksqqui43v6og" path="res://PlayerCamera.gd" id="2_2wp28"]
-[ext_resource type="PackedScene" uid="uid://clqb70pltj4d8" path="res://GUI.tscn" id="2_t680u"]
+[ext_resource type="PackedScene" path="res://GUI.tscn" id="2_t680u"]
 [ext_resource type="PackedScene" uid="uid://cy2qg5mdi1k05" path="res://solar_system.tscn" id="5_vwwyn"]
+[ext_resource type="AudioStream" uid="uid://cc15rbphktkse" path="res://ASSETS/SOUNDSCAPE.mp3" id="6_yu2ri"]
+[ext_resource type="AudioStream" uid="uid://5yxiu7kyac3d" path="res://ASSETS/MUSIC.mp3" id="7_1h6pg"]
+[ext_resource type="AudioStream" uid="uid://cv2s4d5v5f130" path="res://ASSETS/Sun eats you.wav" id="8_1h6pg"]
 
 [node name="Universe" type="Node2D"]
 script = ExtResource("1_vwwyn")
@@ -28,6 +31,19 @@ offset_left = -550.0
 offset_top = -300.0
 offset_right = -550.0
 offset_bottom = -300.0
+
+[node name="Soundscape" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_yu2ri")
+volume_db = -5.0
+autoplay = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1h6pg")
+volume_db = -2.0
+autoplay = true
+
+[node name="SunEatsYou" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1h6pg")
 
 [connection signal="absorbed" from="PlayerStar" to="." method="_on_player_star_absorbed"]
 [connection signal="massheatupdate" from="PlayerStar" to="." method="_on_player_star_massheatupdate"]

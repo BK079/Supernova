@@ -34,6 +34,7 @@ func _physics_process(delta):
 
 func _on_player_star_absorbed(body):
 	$PlayerStar/Cameratransform.reparent(body)
+	$SunEatsYou.play()
 
 
 func _on_player_star_massheatupdate(mass, heat):
