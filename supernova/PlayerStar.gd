@@ -90,6 +90,9 @@ func _on_body_entered(body):
 			absorbed.emit(body)
 			queue_free()
 		if self.mass > body.mass:
+			$EatingPlanet.play()
+			$GainHeat.play()
+			$GainMass.play()
 			mass = clamp(mass+body.mass, 10, 1000)
 			heat = clamp(heat+body.mass, 10, 1000)
 			Globals.celestialbodies.erase(body)
