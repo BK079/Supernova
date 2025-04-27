@@ -33,10 +33,12 @@ offset_bottom = -300.0
 
 [node name="Soundscape" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_yu2ri")
+volume_db = -5.0
 autoplay = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_1h6pg")
+volume_db = -2.0
 autoplay = true
 
 [connection signal="absorbed" from="PlayerStar" to="." method="_on_player_star_absorbed"]

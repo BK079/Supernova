@@ -69,13 +69,18 @@ func Gravity():
 
 func _on_body_entered(body):
 	if body.is_in_group("Planets"):
+		$EatingPlanet.play()
 		if body.type == 1:
 			mass = clamp(mass+body.mass, 10, 1000)
+			$GainMass.play()
 		if body.type == 2:
 			mass = clamp(mass+body.mass*0.5, 10, 1000)
 			heat = clamp(heat+body.mass*0.5, 10, 1000)
+			$GainHeat.play()
+			$GainMass.play()
 		if body.type == 3:
 			heat = clamp(heat+body.mass, 10, 1000)
+			$GainHeat.play()
 		Globals.celestialbodies.erase(body)
 		body.queue_free()
 	if body.is_in_group("Celestials"):
