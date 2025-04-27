@@ -26,9 +26,10 @@ func _physics_process(delta):
 		$Camera2D/Control/GUI/VBoxContainer2/HBoxContainer/HeatBar.value = heatrack
 	if !Globals.celestialbodies.is_empty() and has_node("PlayerStar"):
 		for bodies in Globals.celestialbodies:
-			var distance = $PlayerStar.get_global_position() - bodies.get_global_position()
-			if  distance.length() < $PlayerStar.mass*gravityrange:
-				bodies.stableorbit = false
+			if is_instance_valid(bodies):
+				var distance = $PlayerStar.get_global_position() - bodies.get_global_position()
+				if  distance.length() < $PlayerStar.mass*gravityrange:
+					bodies.stableorbit = false
 				
 	$Camera2D.mass = masstrack
 
