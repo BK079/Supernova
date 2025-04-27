@@ -32,7 +32,9 @@ text = "Heat
 
 [node name="HeatBar" type="TextureProgressBar" parent="GUI/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
-max_value = 300.0
+min_value = 50.0
+max_value = 1000.0
+value = 50.0
 texture_under = ExtResource("1_b741m")
 texture_progress = ExtResource("2_8vf7g")
 
@@ -47,7 +49,9 @@ text = "Mass
 
 [node name="MassBar" type="TextureProgressBar" parent="GUI/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
-max_value = 300.0
+min_value = 50.0
+max_value = 1000.0
+value = 50.0
 texture_under = ExtResource("3_y7wfm")
 texture_progress = ExtResource("4_75o6k")
 

@@ -1,8 +1,8 @@
 extends GPUParticles2D
 
 func _physics_process(_delta: float) -> void:
-	var heat = clamp(get_parent().heat, 0, 1000)
-	var mass = clamp(get_parent().mass, 0, 1000)
+	var heat = clamp(get_parent().heat, 50, 1000)
+	var mass = clamp(get_parent().mass, 50, 1000)
 	
 	scale = Vector2(heat, mass) * 0.01
 	

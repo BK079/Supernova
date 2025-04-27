@@ -11,9 +11,8 @@ func _ready():
 	$Camera2D/Control/GUI/VBoxContainer2/HBoxContainer2/MassBar.value = masstrack
 	$Camera2D/Control/GUI/VBoxContainer2/HBoxContainer/HeatBar.value = heatrack
 	var systeminstance = solarsystem.instantiate()
-	print(get_child(0).get_global_position())
 	add_child(systeminstance)
-	
+	print(get_child(6).get_global_position())
 
 	
 	
