@@ -3,14 +3,15 @@ extends RigidBody2D
 @export var thrust = 0.5
 @export var heat : float
 @export var density : float
-
+var lost = false
 
 
 signal absorbed
 signal massheatupdate
+signal loss
 
 func _onready():
-	$CollisionShape2D.shape.radius = max(mass*density, 1)
+	$CollisionShape2D.shape.radius = max(mass/2, 50)
 	$Sprite2D.scale = Vector2(max(mass*density, 0.01), max(mass*density, 0.01))
 	Globals.celestialbodies.append(self)
 
@@ -25,6 +26,7 @@ func _integrate_forces(state):
 		var mouseangle = get_angle_to(get_global_mouse_position())
 		var x_pos = cos(mouseangle)
 		var y_pos = sin(mouseangle)
+		Jetlength = max(mass*2, 1000)
 		$Jet.position.x = Jetlength * -x_pos
 		$Jet.position.y = Jetlength * -y_pos
 		$Jet.rotation = mouseangle + (PI/2)
@@ -39,7 +41,7 @@ func _integrate_forces(state):
 		
 	if Input.is_action_pressed("Onmouseright"):
 		state.apply_force(disttomouse*thrust*mass)
-		heat = clamp(heat-0.1, 10, 1000)
+		heat = clamp(heat-1, 50, 1000)
 		var Jetlength = $Jet.position.length()
 		var mouseangle = get_angle_to(get_global_mouse_position())
 		var x_pos = cos(mouseangle)
@@ -51,7 +53,7 @@ func _integrate_forces(state):
 	if Input.is_action_just_released("Onmouseright"):
 		$Jet.visible = false
 		
-	$CollisionShape2D.shape.radius = max(mass*density, 1)
+	$CollisionShape2D.shape.radius = max(mass/2, 50)
 	$Sprite2D.scale = Vector2(max(mass*density*0.03, 0.01), max(mass*density*0.03, 0.01))
 	Gravity()
 		
@@ -86,7 +88,6 @@ func _on_body_entered(body):
 		Globals.celestialbodies.erase(body)
 		body.queue_free()
 	if body.is_in_group("Celestials"):
-		print(body.mass)
 		if body.mass > self.mass:
 			absorbed.emit(body)
 			queue_free()
@@ -101,6 +102,5 @@ func _on_body_entered(body):
 			for i in starchild.slice(4):
 				i.stableorbit = false
 				i.reparent(get_parent())
-			print(Globals.celestialbodies)
 			body.queue_free()
 	massheatupdate.emit(mass, heat)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkdr0x0gx64mo"]
+
+[ext_resource type="Script" uid="uid://pwvuku3c8ynw" path="res://mainmenu.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://dx83x5yn67eww" path="res://Universe.tscn" id="2_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://bos13mhytkjdl" path="res://Rogue Star Title Screen.png" id="2_feb5d"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_e2o6t")
+universescene = ExtResource("2_fc0e3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(0.640855, 0.54)
+texture = ExtResource("2_feb5d")

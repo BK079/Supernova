@@ -12,6 +12,7 @@ func _ready():
 	$Sprite2D.scale = Vector2(max(mass*density*0.015, 0.01), max(mass*density*0.015, 0.01))
 	linear_velocity = initial_velocity
 	Globals.celestialbodies.append(self)
+	self.mass = randi_range(50, 1000)
 	print(Globals.celestialbodies)
 	pass
 

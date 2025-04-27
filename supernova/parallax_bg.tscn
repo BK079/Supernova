@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b3lay8as2w3vr"]
+
+[node name="ParallaxBG" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.001)
+motion_mirroring = Vector2(1440, 1440)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]

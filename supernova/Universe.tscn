@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx83x5yn67eww"]
+[gd_scene load_steps=10 format=3 uid="uid://dx83x5yn67eww"]
 
 [ext_resource type="PackedScene" uid="uid://bx0hlq561u0vg" path="res://PlayerStar.tscn" id="1_iaove"]
 [ext_resource type="Script" uid="uid://56j3jnfshoro" path="res://universe.gd" id="1_vwwyn"]
 [ext_resource type="Script" uid="uid://bksqqui43v6og" path="res://PlayerCamera.gd" id="2_2wp28"]
 [ext_resource type="PackedScene" uid="uid://clqb70pltj4d8" path="res://GUI.tscn" id="2_t680u"]
+[ext_resource type="PackedScene" uid="uid://b3lay8as2w3vr" path="res://parallax_bg.tscn" id="3_kdak6"]
 [ext_resource type="PackedScene" uid="uid://cy2qg5mdi1k05" path="res://solar_system.tscn" id="5_vwwyn"]
 [ext_resource type="AudioStream" uid="uid://cc15rbphktkse" path="res://ASSETS/SOUNDSCAPE.mp3" id="6_yu2ri"]
 [ext_resource type="AudioStream" uid="uid://5yxiu7kyac3d" path="res://ASSETS/MUSIC.mp3" id="7_1h6pg"]
@@ -14,23 +15,24 @@ script = ExtResource("1_vwwyn")
 gravityrange = 2.0
 solarsystem = ExtResource("5_vwwyn")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="ParallaxBG" parent="." instance=ExtResource("3_kdak6")]
 
 [node name="PlayerStar" parent="." instance=ExtResource("1_iaove")]
-position = Vector2(577, 931)
+position = Vector2(1316, 1335)
 
 [node name="Cameratransform" type="RemoteTransform2D" parent="PlayerStar"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(577, 931)
+position = Vector2(1316, 1335)
 script = ExtResource("2_2wp28")
 
 [node name="Control" parent="Camera2D" instance=ExtResource("2_t680u")]
-offset_left = -550.0
-offset_top = -300.0
-offset_right = -550.0
-offset_bottom = -300.0
+offset_left = -926.0
+offset_top = -507.0
+offset_right = -926.0
+offset_bottom = -507.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Soundscape" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_yu2ri")
@@ -46,4 +48,6 @@ autoplay = true
 stream = ExtResource("8_1h6pg")
 
 [connection signal="absorbed" from="PlayerStar" to="." method="_on_player_star_absorbed"]
+[connection signal="loss" from="PlayerStar" to="." method="_on_player_star_loss"]
 [connection signal="massheatupdate" from="PlayerStar" to="." method="_on_player_star_massheatupdate"]
+[connection signal="zoomlvl" from="Camera2D" to="." method="_on_camera_2d_zoomlvl"]
