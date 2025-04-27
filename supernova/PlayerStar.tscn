@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bx0hlq561u0vg"]
+[gd_scene load_steps=23 format=3 uid="uid://bx0hlq561u0vg"]
 
 [ext_resource type="Script" uid="uid://05cxj7rstte6" path="res://PlayerStar.gd" id="1_8uh7m"]
 [ext_resource type="Texture2D" uid="uid://cf68hnoet5472" path="res://icon.svg" id="1_37kl0"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://usaq6it8agx3" path="res://ASSETS/Eating a planet.wav" id="10_7ii1e"]
 [ext_resource type="AudioStream" uid="uid://dvdo4wetrwfu" path="res://ASSETS/Gain Mass.wav" id="11_aqgaq"]
 [ext_resource type="AudioStream" uid="uid://cj5s6b3rvawjy" path="res://ASSETS/Gain Heat.wav" id="12_sutho"]
+[ext_resource type="AudioStream" uid="uid://ct7iu4jmmxgvl" path="res://ASSETS/Solar Flare.wav" id="13_7ii1e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37kl0"]
 
@@ -132,5 +133,10 @@ stream = ExtResource("11_aqgaq")
 
 [node name="GainHeat" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_sutho")
+
+[node name="SolarFlare" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_7ii1e")
+volume_db = -10.0
+pitch_scale = 0.9
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

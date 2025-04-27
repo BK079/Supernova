@@ -29,8 +29,13 @@ func _integrate_forces(state):
 		$Jet.position.y = Jetlength * -y_pos
 		$Jet.rotation = mouseangle + (PI/2)
 		$Jet.visible = true
+		if $SolarFlare.playing == false:
+			$SolarFlare.playing=true
+		else: pass
+		
 	if Input.is_action_just_released("Onmouseleft"):
 		$Jet.visible = false
+		$SolarFlare.playing=false
 		
 	if Input.is_action_pressed("Onmouseright"):
 		state.apply_force(disttomouse*thrust*mass)
