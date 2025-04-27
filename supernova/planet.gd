@@ -11,22 +11,25 @@ var heat : float
 
 
 var is_star := false
-var stableorbit = false
+var stableorbit = true
 
 signal instability
 
 
 
 func _ready():
-	mass = randi_range(10, 100)
+	mass = randi_range(1, 100)
 	establishtype()
-	$Collidershape.shape.radius = max(mass*density, 1)
-	$Sprite2D.scale = Vector2(max(mass*density*0.015, 0.01), max(mass*density*0.015, 0.01))
+	$Sprite2D.scale = Vector2(mass*density, mass*density)
+	$Collidershape.get_shape().radius *= mass*density
+	print(mass)
 	Globals.celestialbodies.append(self)
 	pass
+
 	
 func _physics_process(delta):
 	Gravity(delta)
+	
 	
 func Gravity(_delta):
 	if stableorbit == false:
@@ -55,10 +58,21 @@ func Gravity(_delta):
 func establishtype():
 	if type == 1:
 		print("Solid")
+		var rockplanet = load("res://rocktransparent.png")
+		$Sprite2D.texture = rockplanet
+		$Collidershape.get_shape().radius = 280.0
 	if type == 2:
 		print("Liquid")
+		var earthlike = load("res://Earthliketransparent.png")
+		$Sprite2D.texture = earthlike
+		$Collidershape.get_shape().radius = 400.0
+		heat = mass
 	if type == 3:
 		print("Gas")
+		var gasplanet = load("res://Gastransparent.png")
+		$Sprite2D.texture = gasplanet
+		$Collidershape.get_shape().radius = 830.0
+		heat = mass
 
 
 func _on_body_entered(body):

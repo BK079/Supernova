@@ -61,7 +61,7 @@ func _integrate_forces(state):
 
 func Gravity():
 	for otherbody in Globals.celestialbodies:
-		if otherbody != self:
+		if otherbody != self and is_instance_valid(otherbody):
 			var otherbodyMass = otherbody.mass
 			var direction = self.get_global_position() - otherbody.get_global_position()
 			var distance = direction.length()
@@ -101,6 +101,10 @@ func _on_body_entered(body):
 			mass = clamp(mass+body.mass, 10, 1000)
 			heat = clamp(heat+body.mass, 10, 1000)
 			Globals.celestialbodies.erase(body)
+			var starchild = body.get_children()
+			for i in starchild.slice(4):
+				i.stableorbit = false
+				i.reparent(get_parent())
 			print(Globals.celestialbodies)
 			body.queue_free()
 	massheatupdate.emit(mass, heat)

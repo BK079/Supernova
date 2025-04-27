@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bx0hlq561u0vg" path="res://PlayerStar.tscn" id="1_iaove"]
 [ext_resource type="Script" uid="uid://56j3jnfshoro" path="res://universe.gd" id="1_vwwyn"]
 [ext_resource type="Script" uid="uid://bksqqui43v6og" path="res://PlayerCamera.gd" id="2_2wp28"]
-[ext_resource type="PackedScene" path="res://GUI.tscn" id="2_t680u"]
+[ext_resource type="PackedScene" uid="uid://clqb70pltj4d8" path="res://GUI.tscn" id="2_t680u"]
 [ext_resource type="PackedScene" uid="uid://cy2qg5mdi1k05" path="res://solar_system.tscn" id="5_vwwyn"]
 [ext_resource type="AudioStream" uid="uid://cc15rbphktkse" path="res://ASSETS/SOUNDSCAPE.mp3" id="6_yu2ri"]
 [ext_resource type="AudioStream" uid="uid://5yxiu7kyac3d" path="res://ASSETS/MUSIC.mp3" id="7_1h6pg"]
