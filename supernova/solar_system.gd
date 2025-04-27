@@ -18,7 +18,7 @@ func _ready():
 		while orbits.any(func(number): return ((orbitradius - 100) <= number and number <= (orbitradius + 100))):
 			orbitradius = randi_range(100.0, 3000.0)
 		orbits.append(orbitradius)
-		get_child(0).get_child(i+2).orbitradius = orbitradius
-		get_child(0).get_child(i+2).position = Vector2(orbitradius, orbitradius).rotated(randf_range(-2*PI, 2*PI))
+		get_child(0).get_child(i+4).orbitradius = orbitradius
+		get_child(0).get_child(i+4).position = Vector2(orbitradius, orbitradius).rotated(randf_range(-2*PI, 2*PI))
 		
 	

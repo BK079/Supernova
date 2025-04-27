@@ -1,9 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://csush3o8m3yfk"]
+[gd_scene load_steps=14 format=3 uid="uid://csush3o8m3yfk"]
 
 [ext_resource type="Script" uid="uid://batkrc2veckq6" path="res://other_star.gd" id="1_qqgrt"]
 [ext_resource type="Texture2D" uid="uid://cf68hnoet5472" path="res://icon.svg" id="1_scml5"]
+[ext_resource type="Texture2D" uid="uid://ctbvrriaods8b" path="res://Heat2.png" id="3_7as1q"]
+[ext_resource type="Script" uid="uid://b8odyydimcp18" path="res://heat.gd" id="4_uftoj"]
+[ext_resource type="Texture2D" uid="uid://cfepnhul5gjgf" path="res://mass.png" id="7_pvita"]
+[ext_resource type="Script" uid="uid://bnwa24cjg5vbr" path="res://mass.gd" id="8_tx8om"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37kl0"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p7ko7"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_bnaps"]
+offsets = PackedFloat32Array(0, 0.179673, 0.437387, 0.693285, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.812553, 0.396063, 9.62615e-07, 1, 0.830227, 0.628377, 0.266784, 1, 1, 1, 1, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_flfly"]
+gradient = SubResource("Gradient_bnaps")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2em4o"]
+particle_flag_disable_z = true
+spread = 64.286
+flatness = 0.125
+angular_velocity_min = -132.0
+angular_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.4
+color_ramp = SubResource("GradientTexture1D_flfly")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fo5ye"]
+blend_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_srucj"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.2
+color_ramp = SubResource("GradientTexture1D_flfly")
 
 [node name="OtherStar" type="RigidBody2D" groups=["Celestials"]]
 collision_layer = 32
@@ -11,8 +46,11 @@ collision_mask = 126
 mass = 300.0
 gravity_scale = 0.0
 lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 2
 script = ExtResource("1_qqgrt")
 density = 0.02
+heat = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_37kl0")
@@ -21,3 +59,19 @@ debug_color = Color(0.133333, 0, 0, 1)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_scml5")
+
+[node name="heat" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_p7ko7")
+texture = ExtResource("3_7as1q")
+lifetime = 0.5
+interp_to_end = 0.019
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_2em4o")
+script = ExtResource("4_uftoj")
+
+[node name="Mass" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_fo5ye")
+texture = ExtResource("7_pvita")
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_srucj")
+script = ExtResource("8_tx8om")

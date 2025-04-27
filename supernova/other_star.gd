@@ -2,6 +2,7 @@ extends RigidBody2D
 
 @export var density : float
 @export var initial_velocity := Vector2.ZERO
+@export var heat : float
 var is_star := true
 var stableorbit := true
 

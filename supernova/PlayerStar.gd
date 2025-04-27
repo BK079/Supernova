@@ -20,7 +20,7 @@ func _integrate_forces(state):
 	var disttomouse = get_global_mouse_position() - get_global_position()
 	if Input.is_action_pressed("Onmouseleft"):
 		state.apply_force(disttomouse*thrust*mass)
-		mass = clamp(mass-1, 10, 1000)
+		mass = clamp(mass-0.1, 10, 1000)
 		var Jetlength = $Jet.position.length()
 		var mouseangle = get_angle_to(get_global_mouse_position())
 		var x_pos = cos(mouseangle)
@@ -34,7 +34,7 @@ func _integrate_forces(state):
 		
 	if Input.is_action_pressed("Onmouseright"):
 		state.apply_force(disttomouse*thrust*mass)
-		heat = clamp(heat-1, 10, 1000)
+		heat = clamp(heat-0.1, 10, 1000)
 		var Jetlength = $Jet.position.length()
 		var mouseangle = get_angle_to(get_global_mouse_position())
 		var x_pos = cos(mouseangle)
