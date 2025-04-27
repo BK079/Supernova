@@ -54,8 +54,6 @@ func _integrate_forces(state):
 	$CollisionShape2D.shape.radius = max(mass*density, 1)
 	$Sprite2D.scale = Vector2(max(mass*density*0.03, 0.01), max(mass*density*0.03, 0.01))
 	Gravity()
-	print(heat)
-	print(mass)
 	
 		
 
@@ -89,7 +87,6 @@ func _on_body_entered(body):
 		Globals.celestialbodies.erase(body)
 		body.queue_free()
 	if body.is_in_group("Celestials"):
-		print(body.get_rid())
 		print(body.mass)
 		if body.mass > self.mass:
 			absorbed.emit(body)

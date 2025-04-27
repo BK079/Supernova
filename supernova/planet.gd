@@ -22,9 +22,7 @@ func _ready():
 	establishtype()
 	$Sprite2D.scale = Vector2(mass*density, mass*density)
 	$Collidershape.get_shape().radius *= mass*density
-	print(mass)
 	Globals.celestialbodies.append(self)
-	pass
 
 	
 func _physics_process(delta):
@@ -76,14 +74,11 @@ func establishtype():
 
 
 func _on_body_entered(body):
-	print("test")
 	if body.is_in_group("Celestials"):
 		Globals.celestialbodies.erase(self)
 		self.queue_free()
 	if body.is_in_group("Planets"):
-		print("test1")
 		if body.mass < self.mass:
-			print("test2")
 			self.mass += body.mass
 			self.heat += body.heat
 			Globals.celestialbodies.erase(body)
