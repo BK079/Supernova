@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://0vllse5yrq8x"
+path="res://.godot/imported/Solar Flare.wav-3b170b7b63c27c2ca80c9786b44f655e.sample"
+
+[deps]
+
+source_file="res://ASSETS/Solar Flare.wav"
+dest_files=["res://.godot/imported/Solar Flare.wav-3b170b7b63c27c2ca80c9786b44f655e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
