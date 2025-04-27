@@ -34,7 +34,7 @@ func _integrate_forces(state):
 		
 	if Input.is_action_pressed("Onmouseright"):
 		state.apply_force(disttomouse*thrust*mass)
-		heat -= 1
+		heat = clamp(heat-1, 10, 1000)
 		var Jetlength = $Jet.position.length()
 		var mouseangle = get_angle_to(get_global_mouse_position())
 		var x_pos = cos(mouseangle)
@@ -73,9 +73,9 @@ func _on_body_entered(body):
 			mass = clamp(mass+body.mass, 10, 1000)
 		if body.type == 2:
 			mass = clamp(mass+body.mass*0.5, 10, 1000)
-			heat += body.mass*0.5
+			heat = clamp(heat+body.mass*0.5, 10, 1000)
 		if body.type == 3:
-			heat += body.mass
+			heat = clamp(heat+body.mass, 10, 1000)
 		Globals.celestialbodies.erase(body)
 		body.queue_free()
 	if body.is_in_group("Celestials"):
@@ -86,7 +86,7 @@ func _on_body_entered(body):
 			queue_free()
 		if self.mass > body.mass:
 			mass = clamp(mass+body.mass, 10, 1000)
-			heat += body.mass
+			heat = clamp(heat+body.mass, 10, 1000)
 			Globals.celestialbodies.erase(body)
 			print(Globals.celestialbodies)
 			body.queue_free()

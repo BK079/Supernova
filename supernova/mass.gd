@@ -2,8 +2,8 @@ extends GPUParticles2D
 
 
 func _physics_process(delta: float) -> void:
-	var mass = clamp(get_parent().mass, 0, 1000)
-	var heat = clamp(get_parent().heat, 0, 1000)
+	var mass = clamp(get_parent().mass, 10, 1000)
+	var heat = clamp(get_parent().heat, 10, 1000)
 	
 	var density = get_parent().scale
 	

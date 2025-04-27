@@ -7,15 +7,18 @@ var type = randi_range(1, 3)
 var orbitradius = randi_range(100.0, 2000.0)
 var orbitangle = randf_range(-2*PI, 2*PI)
 var impulsetrigger = false
+var heat : float
+
 
 var is_star := false
-var stableorbit = true
+var stableorbit = false
 
 signal instability
 
 
 
 func _ready():
+	mass = randi_range(10, 100)
 	establishtype()
 	$Collidershape.shape.radius = max(mass*density, 1)
 	$Sprite2D.scale = Vector2(max(mass*density*0.015, 0.01), max(mass*density*0.015, 0.01))
@@ -56,3 +59,16 @@ func establishtype():
 		print("Liquid")
 	if type == 3:
 		print("Gas")
+
+
+func _on_body_entered(body):
+	if body.is_in_group("Celestials"):
+		self.queue_free()
+	if body.in_group("Planets"):
+		print("test1")
+		if body.mass < self.mass:
+			print("test2")
+			self.mass += body.mass
+			self.heat += body.heat
+			body.queue_free()
+			

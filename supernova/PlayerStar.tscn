@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cf68hnoet5472" path="res://icon.svg" id="1_37kl0"]
 [ext_resource type="Texture2D" uid="uid://ctbvrriaods8b" path="res://Heat2.png" id="3_mxbn7"]
 [ext_resource type="Texture2D" uid="uid://d2fuahmy4leag" path="res://solar flare.png" id="3_of3j0"]
-[ext_resource type="Script" path="res://heat.gd" id="4_is6pa"]
+[ext_resource type="Script" uid="uid://b8odyydimcp18" path="res://heat.gd" id="4_is6pa"]
 [ext_resource type="Texture2D" uid="uid://cfepnhul5gjgf" path="res://mass.png" id="4_ncq60"]
 [ext_resource type="Script" uid="uid://b56ewmc6x4hrr" path="res://jet.gd" id="6_flfly"]
-[ext_resource type="Script" path="res://mass.gd" id="6_of3j0"]
+[ext_resource type="Script" uid="uid://bnwa24cjg5vbr" path="res://mass.gd" id="6_of3j0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37kl0"]
 
